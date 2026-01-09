@@ -53,12 +53,18 @@ app.get('/view-donations', (req, res) => {
 
 // 3. ADD DONATION ROUTE
 app.post('/add-donation', (req, res) => {
-    const { donor_id, medicine_name, expiry_date, quantity } = req.body;
-    const sql = "INSERT INTO donations (donor_id, medicine_name, expiry_date, quantity) VALUES (?, ?, ?, ?)";
+    // Add blood_group here 
+    const { donor_id, medicine_name, expiry_date, quantity, blood_group } = req.body;
     
-    db.query(sql, [donor_id, medicine_name, expiry_date, quantity], (err, result) => {
-        if (err) return res.status(500).send(err);
-        res.status(200).send({ message: "Success!" });
+    // Update the SQL to include the new column
+    const sql = "INSERT INTO donations (donor_id, medicine_name, expiry_date, quantity, blood_group) VALUES (?, ?, ?, ?, ?)";
+    
+    db.query(sql, [donor_id, medicine_name, expiry_date, quantity, blood_group || 'N/A'], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send(err);
+        }
+        res.status(200).send({ message: "Donation added successfully!" });
     });
 });
 
@@ -101,6 +107,7 @@ app.post('/claim-donation', (req, res) => {
         res.status(200).send({ message: "Medicine claimed successfully!" });
     });
 });
+
 
 // --- ALWAYS KEEP THIS AT THE VERY BOTTOM ---
 app.listen(5000, () => {
