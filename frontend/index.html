@@ -1,0 +1,1164 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedSync - Healthcare Supply Coordination Platform</title><!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script><!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><!-- Link to Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css"><!-- Element SDK -->
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full"><!-- =====================================================
+             NOTIFICATION COMPONENT
+        ===================================================== -->
+   <div id="notification" class="notification"><span id="notification-icon" class="notification-icon">✓</span>
+    <div class="notification-content">
+     <div id="notification-title" class="notification-title"></div>
+     <div id="notification-message" class="notification-message"></div>
+    </div><button onclick="hideNotification()" class="notification-close">×</button>
+   </div><!-- =====================================================
+             PAGE 1: LANDING PAGE
+        ===================================================== -->
+   <div id="landing-page" class="page active h-full">
+    <div class="h-full flex flex-col"><!-- Landing Navbar -->
+     <nav class="navbar">
+      <div class="nav-logo">
+       <svg width="40" height="40" viewbox="0 0 40 40" fill="none"><rect width="40" height="40" rx="12" fill="#2563EB" /> <path d="M20 10L30 15V25L20 30L10 25V15L20 10Z" stroke="white" stroke-width="2.5" fill="none" /> <path d="M14 20H26M20 14V26" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+       </svg><span id="landing-title" class="nav-title">MedSync</span>
+      </div>
+      <div class="nav-actions"><button onclick="showPage('login-page')" class="btn-secondary">Login</button> <button onclick="showPage('register-page')" class="btn-primary">Get Started</button>
+      </div>
+     </nav><!-- Hero Section -->
+     <div class="hero-section">
+      <div class="hero-content animate-fade-in">
+       <div class="hero-badge"><span class="badge-icon">🏥</span> <span>Healthcare Supply Platform</span>
+       </div>
+       <h1 class="hero-title" id="hero-title">Connecting Medical Supplies<br>
+        Where They're Needed Most</h1>
+       <p class="hero-description" id="hero-tagline">A transparent platform for donors, healthcare facilities, and NGOs to coordinate medical supply distribution efficiently and save lives.</p><!-- Role Selection Cards -->
+       <div class="role-cards-container">
+        <div class="role-card animate-fade-in stagger-1" onclick="selectRole('donor')">
+         <div class="role-icon donor-icon"><span class="role-emoji">🤲</span>
+         </div>
+         <h3 class="role-title" id="donor-card-title">Donor</h3>
+         <p class="role-description">Donate medical supplies and make a difference in healthcare</p>
+         <ul class="role-features">
+          <li>✓ Easy donation process</li>
+          <li>✓ Real-time tracking</li>
+          <li>✓ Impact reports</li>
+         </ul>
+        </div>
+        <div class="role-card featured animate-fade-in stagger-2" onclick="selectRole('ngo')">
+         <div class="featured-badge">
+          Most Popular
+         </div>
+         <div class="role-icon ngo-icon"><span class="role-emoji">🤝</span>
+         </div>
+         <h3 class="role-title" id="ngo-card-title">NGO / Coordinator</h3>
+         <p class="role-description">Manage and distribute supplies to maximize impact</p>
+         <ul class="role-features">
+          <li>✓ Supply matching system</li>
+          <li>✓ Allocation management</li>
+          <li>✓ Analytics dashboard</li>
+         </ul>
+        </div>
+        <div class="role-card animate-fade-in stagger-3" onclick="selectRole('facility')">
+         <div class="role-icon facility-icon"><span class="role-emoji">🏥</span>
+         </div>
+         <h3 class="role-title" id="facility-card-title">Healthcare Facility</h3>
+         <p class="role-description">Request essential supplies for your medical facility</p>
+         <ul class="role-features">
+          <li>✓ Priority-based requests</li>
+          <li>✓ Supply tracking</li>
+          <li>✓ Fast fulfillment</li>
+         </ul>
+        </div>
+       </div><!-- Features Section -->
+       <div class="features-section animate-fade-in stagger-4">
+        <div class="feature-item">
+         <div class="feature-icon">
+          🔒
+         </div>
+         <div class="feature-text">
+          <h4>Secure &amp; Transparent</h4>
+          <p>End-to-end tracking</p>
+         </div>
+        </div>
+        <div class="feature-item">
+         <div class="feature-icon">
+          ⚡
+         </div>
+         <div class="feature-text">
+          <h4>Fast Matching</h4>
+          <p>AI-powered allocation</p>
+         </div>
+        </div>
+        <div class="feature-item">
+         <div class="feature-icon">
+          📊
+         </div>
+         <div class="feature-text">
+          <h4>Real-time Analytics</h4>
+          <p>Track your impact</p>
+         </div>
+        </div>
+        <div class="feature-item">
+         <div class="feature-icon">
+          🌍
+         </div>
+         <div class="feature-text">
+          <h4>Global Network</h4>
+          <p>Worldwide coordination</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- =====================================================
+             PAGE 2: LOGIN PAGE
+        ===================================================== -->
+   <div id="login-page" class="page h-full">
+    <div class="auth-container"><!-- Left side - Form -->
+     <div class="auth-form-side">
+      <div class="auth-form-content animate-fade-in"><button onclick="showPage('landing-page')" class="back-button"> <span>←</span> Back to Home </button>
+       <div class="auth-header">
+        <h1 class="auth-title">Welcome Back</h1>
+        <p class="auth-subtitle">Sign in to continue to MedSync</p>
+       </div>
+       <form onsubmit="handleLogin(event)" class="auth-form">
+        <div class="form-group"><label for="login-email" class="form-label">Email Address</label> <input type="email" id="login-email" class="form-input" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group"><label for="login-password" class="form-label">Password</label> <input type="password" id="login-password" class="form-input" placeholder="Enter your password" required>
+        </div>
+        <div class="form-options"><label class="checkbox-label"> <input type="checkbox" class="checkbox-input"> <span>Remember me</span> </label> <a href="#" class="link-primary">Forgot password?</a>
+        </div><button type="submit" class="btn-primary btn-full">Sign In</button>
+        <p class="auth-footer-text">Don't have an account? <a href="#" onclick="showPage('register-page')" class="link-primary">Sign up</a></p>
+       </form>
+      </div>
+     </div><!-- Right side - Illustration -->
+     <div class="auth-illustration-side auth-illustration-login">
+      <div class="auth-illustration-content animate-fade-in">
+       <svg width="240" height="240" viewbox="0 0 240 240" fill="none" class="auth-svg"><circle cx="120" cy="120" r="100" stroke="white" stroke-width="2" stroke-dasharray="10 10" fill="none" opacity="0.2" /> <circle cx="120" cy="120" r="70" fill="white" fill-opacity="0.1" /> <rect x="80" y="80" width="80" height="80" rx="16" fill="white" fill-opacity="0.15" /> <path d="M100 120H140M120 100V140" stroke="white" stroke-width="8" stroke-linecap="round" />
+       </svg>
+       <h2 class="auth-illustration-title">Track &amp; Manage Supplies</h2>
+       <p class="auth-illustration-text">Monitor donations, requests, and distributions in real-time with our comprehensive dashboard.</p>
+      </div>
+     </div>
+    </div>
+   </div><!-- =====================================================
+             PAGE 3: REGISTER PAGE
+        ===================================================== -->
+   <div id="register-page" class="page h-full">
+    <div class="auth-container"><!-- Left side - Illustration -->
+     <div class="auth-illustration-side auth-illustration-register">
+      <div class="auth-illustration-content animate-fade-in">
+       <svg width="240" height="240" viewbox="0 0 240 240" fill="none" class="auth-svg"><circle cx="120" cy="120" r="90" stroke="white" stroke-width="2" fill="none" opacity="0.2" /> <circle cx="90" cy="100" r="30" fill="white" fill-opacity="0.15" /> <circle cx="150" cy="100" r="30" fill="white" fill-opacity="0.15" /> <circle cx="120" cy="150" r="30" fill="white" fill-opacity="0.15" /> <path d="M90 100L120 150M150 100L120 150M90 100L150 100" stroke="white" stroke-width="4" stroke-linecap="round" />
+       </svg>
+       <h2 class="auth-illustration-title">Join Our Network</h2>
+       <p class="auth-illustration-text">Connect with healthcare facilities, donors, and coordinators to create meaningful impact together.</p>
+      </div>
+     </div><!-- Right side - Form -->
+     <div class="auth-form-side">
+      <div class="auth-form-content animate-fade-in"><button onclick="showPage('landing-page')" class="back-button"> <span>←</span> Back to Home </button>
+       <div class="auth-header">
+        <h1 class="auth-title">Create Account</h1>
+        <p class="auth-subtitle">Join MedSync to start coordinating supplies</p>
+       </div>
+       <form onsubmit="handleRegister(event)" class="auth-form">
+        <div class="form-group"><label for="register-name" class="form-label">Full Name / Organization</label> <input type="text" id="register-name" class="form-input" placeholder="Enter your name or organization" required>
+        </div>
+        <div class="form-group"><label for="register-email" class="form-label">Email Address</label> <input type="email" id="register-email" class="form-input" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group"><label for="register-phone" class="form-label">Phone Number</label> <input type="tel" id="register-phone" class="form-input" placeholder="+1 (555) 000-0000" required>
+        </div>
+        <div class="form-group"><label for="register-password" class="form-label">Password</label> <input type="password" id="register-password" class="form-input" placeholder="Create a strong password" required>
+        </div>
+        <div class="form-group"><label for="register-role" class="form-label">Select Your Role</label> <select id="register-role" class="form-input" required> <option value="">Choose a role</option> <option value="donor">Donor - I want to donate supplies</option> <option value="ngo">NGO / Coordinator - I want to manage distribution</option> <option value="facility">Healthcare Facility - I need supplies</option> </select>
+        </div>
+        <div class="form-group"><label class="checkbox-label"> <input type="checkbox" class="checkbox-input" required> <span>I agree to the Terms of Service and Privacy Policy</span> </label>
+        </div><button type="submit" class="btn-primary btn-full">Create Account</button>
+        <p class="auth-footer-text">Already have an account? <a href="#" onclick="showPage('login-page')" class="link-primary">Sign in</a></p>
+       </form>
+      </div>
+     </div>
+    </div>
+   </div><!-- =====================================================
+             PAGE 4: DONOR DASHBOARD
+        ===================================================== -->
+   <div id="donor-dashboard" class="page h-full">
+    <div class="dashboard-layout"><!-- Sidebar -->
+     <aside class="sidebar">
+      <div class="sidebar-header">
+       <div class="nav-logo">
+        <svg width="36" height="36" viewbox="0 0 40 40" fill="none"><rect width="40" height="40" rx="12" fill="#2563EB" /> <path d="M20 10L30 15V25L20 30L10 25V15L20 10Z" stroke="white" stroke-width="2.5" fill="none" /> <path d="M14 20H26M20 14V26" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+        </svg><span>MedSync</span>
+       </div>
+      </div>
+      <nav class="sidebar-nav">
+       <div class="sidebar-item active" onclick="showDashboardSection('donor', 'overview')"><span class="sidebar-icon">📊</span> <span>Overview</span>
+       </div>
+       <div class="sidebar-item" onclick="showDashboardSection('donor', 'donate')"><span class="sidebar-icon">➕</span> <span>Add Donation</span>
+       </div>
+       <div class="sidebar-item" onclick="showDashboardSection('donor', 'mydonations')"><span class="sidebar-icon">📦</span> <span>My Donations</span>
+       </div>
+       <div class="sidebar-item" onclick="showPage('status-page')"><span class="sidebar-icon">🔄</span> <span>Track Status</span>
+       </div>
+       <div class="sidebar-item" onclick="showPage('profile-page')"><span class="sidebar-icon">👤</span> <span>Profile</span>
+       </div>
+      </nav>
+      <div class="sidebar-footer">
+       <div class="sidebar-item" onclick="logout()"><span class="sidebar-icon">🚪</span> <span>Logout</span>
+       </div>
+      </div>
+     </aside><!-- Main Content -->
+     <main class="dashboard-main"><!-- Top Navbar -->
+      <nav class="dashboard-navbar">
+       <div class="dashboard-navbar-left">
+        <h1 class="dashboard-title">Donor Dashboard</h1>
+        <p class="dashboard-subtitle">Welcome back, John Doe</p>
+       </div>
+       <div class="dashboard-navbar-right"><button onclick="showNotification('info', 'Notifications', 'You have 2 new updates')" class="icon-button"> 🔔 </button>
+        <div class="user-avatar donor-avatar">
+         JD
+        </div>
+       </div>
+      </nav>
+      <div class="dashboard-content"><!-- Overview Section -->
+       <div id="donor-overview" class="dashboard-section">
+        <div class="stats-grid">
+         <div class="stat-card animate-fade-in stagger-1">
+          <div class="stat-icon stat-icon-success">
+           📦
+          </div>
+          <div class="stat-details">
+           <div class="stat-value">
+            --
+           </div>
+           <div class="stat-label">
+            Total Donations
+           </div>
+          </div>
+         </div>
+         <div class="stat-card animate-fade-in stagger-2">
+          <div class="stat-icon stat-icon-primary">
+           ✅
+          </div>
+          <div class="stat-details">
+           <div class="stat-value">
+            --
+           </div>
+           <div class="stat-label">
+            Delivered
+           </div>
+          </div>
+         </div>
+         <div class="stat-card animate-fade-in stagger-3">
+          <div class="stat-icon stat-icon-warning">
+           🚚
+          </div>
+          <div class="stat-details">
+           <div class="stat-value">
+            --
+           </div>
+           <div class="stat-label">
+            In Transit
+           </div>
+          </div>
+         </div>
+         <div class="stat-card animate-fade-in stagger-4">
+          <div class="stat-icon stat-icon-info">
+           ⏳
+          </div>
+          <div class="stat-details">
+           <div class="stat-value">
+            --
+           </div>
+           <div class="stat-label">
+            Pending
+           </div>
+          </div>
+         </div>
+        </div><!-- Recent Donations Table -->
+        <div class="card animate-fade-in stagger-3">
+         <div class="card-header">
+          <h2 class="card-title">Recent Donations</h2><button class="btn-secondary btn-sm" onclick="showDashboardSection('donor', 'mydonations')">View All</button>
+         </div>
+         <div class="table-container">
+          <table class="data-table">
+           <thead>
+            <tr>
+             <th>Supply Name</th>
+             <th>Category</th>
+             <th>Quantity</th>
+             <th>Location</th>
+             <th>Date</th>
+             <th>Status</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr class="empty-state">
+             <td colspan="6">
+              <div class="empty-state-content">
+               <div class="empty-state-icon">
+                📦
+               </div>
+               <h3>No donations yet</h3>
+               <p>Start by adding your first donation</p><button class="btn-primary" onclick="showDashboardSection('donor', 'donate')">Add Donation</button>
+              </div></td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+       </div><!-- Add Donation Section -->
+       <div id="donor-donate" class="dashboard-section hidden">
+        <div class="card form-card animate-fade-in">
+         <h2 class="form-card-title">Add New Donation</h2>
+         <p class="form-card-description">Fill in the details of the medical supplies you want to donate</p>
+         <form onsubmit="handleAddDonation(event)" class="donation-form">
+          <div class="form-row">
+           <div class="form-group"><label for="donation-name" class="form-label"> <span>Supply Name</span> <span class="required">*</span> </label> <input type="text" id="donation-name" class="form-input" placeholder="e.g., Surgical Masks" required>
+           </div>
+           <div class="form-group"><label for="donation-category" class="form-label"> <span>Category</span> <span class="required">*</span> </label> <select id="donation-category" class="form-input" required> <option value="">Select category</option> <option value="medicine">Medicine &amp; Pharmaceuticals</option> <option value="equipment">Medical Equipment</option> <option value="ppe">PPE (Personal Protective Equipment)</option> <option value="consumables">Medical Consumables</option> <option value="diagnostic">Diagnostic Equipment</option> <option value="other">Other Supplies</option> </select>
+           </div>
+          </div>
+          <div class="form-row">
+           <div class="form-group"><label for="donation-quantity" class="form-label"> <span>Quantity</span> <span class="required">*</span> </label> <input type="number" id="donation-quantity" class="form-input" placeholder="Enter quantity" min="1" required>
+           </div>
+           <div class="form-group"><label for="donation-unit" class="form-label"> <span>Unit</span> <span class="required">*</span> </label> <select id="donation-unit" class="form-input" required> <option value="units">Units</option> <option value="boxes">Boxes</option> <option value="packs">Packs</option> <option value="bottles">Bottles</option> <option value="kg">Kilograms</option> <option value="liters">Liters</option> </select>
+           </div>
+          </div>
+          <div class="form-group"><label for="donation-location" class="form-label"> <span>Pickup Location</span> <span class="required">*</span> </label> <input type="text" id="donation-location" class="form-input" placeholder="Enter full address with city and state" required>
+           <p class="form-help-text">Please provide complete address for pickup coordination</p>
+          </div>
+          <div class="form-row">
+           <div class="form-group"><label for="donation-expiry" class="form-label">Expiry Date (if applicable)</label> <input type="date" id="donation-expiry" class="form-input">
+           </div>
+           <div class="form-group"><label for="donation-condition" class="form-label"> <span>Condition</span> <span class="required">*</span> </label> <select id="donation-condition" class="form-input" required> <option value="">Select condition</option> <option value="new">New / Unopened</option> <option value="good">Good Condition</option> <option value="fair">Fair Condition</option> </select>
+           </div>
+          </div>
+          <div class="form-group"><label for="donation-notes" class="form-label">Additional Notes</label> <textarea id="donation-notes" class="form-input form-textarea" rows="4" placeholder="Any special handling instructions, storage requirements, or additional information..."></textarea>
+          </div>
+          <div class="form-actions"><button type="submit" class="btn-primary">Submit Donation</button> <button type="button" class="btn-secondary" onclick="showDashboardSection('donor', 'overview')">Cancel</button>
+          </div>
+         </form>
+        </div>
+       </div><!-- My Donations Section -->
+       <div id="donor-mydonations" class="dashboard-section hidden">
+        <div class="card animate-fade-in">
+         <div class="card-header">
+          <div>
+           <h2 class="card-title">All My Donations</h2>
+           <p class="card-subtitle">Track and manage your donation history</p>
+          </div><button class="btn-primary btn-sm" onclick="showDashboardSection('donor', 'donate')">+ Add New</button>
+         </div>
+         <div class="table-container">
+          <table class="data-table">
+           <thead>
+            <tr>
+             <th>ID</th>
+             <th>Supply Name</th>
+             <th>Category</th>
+             <th>Quantity</th>
+             <th>Location</th>
+             <th>Date</th>
+             <th>Status</th>
+             <th>Actions</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr class="empty-state">
+             <td colspan="8">
+              <div class="empty-state-content">
+               <div class="empty-state-icon">
+                📦
+               </div>
+               <h3>No donations recorded</h3>
+               <p>Your donation history will appear here once you add donations</p><button class="btn-primary" onclick="showDashboardSection('donor', 'donate')">Add First Donation</button>
+              </div></td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main>
+    </div>
+   </div><!-- =====================================================
+             PAGE 5: FACILITY DASHBOARD
+        ===================================================== -->
+   <div id="facility-dashboard" class="page h-full">
+    <div class="dashboard-layout"><!-- Sidebar -->
+     <aside class="sidebar">
+      <div class="sidebar-header">
+       <div class="nav-logo">
+        <svg width="36" height="36" viewbox="0 0 40 40" fill="none"><rect width="40" height="40" rx="12" fill="#2563EB" /> <path d="M20 10L30 15V25L20 30L10 25V15L20 10Z" stroke="white" stroke-width="2.5" fill="none" /> <path d="M14 20H26M20 14V26" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+        </svg><span>MedSync</span>
+       </div>
+      </div>
+      <nav class="sidebar-nav">
+       <div class="sidebar-item active" onclick="showDashboardSection('facility', 'overview')"><span class="sidebar-icon">📊</span> <span>Overview</span>
+       </div>
+       <div class="sidebar-item" onclick="showDashboardSection('facility', 'request')"><span class="sidebar-icon">📝</span> <span>Request Supplies</span>
+       </div>
+       <div class="sidebar-item" onclick="showDashboardSection('facility', 'myrequests')"><span class="sidebar-icon">📋</span> <span>My Requests</span>
+       </div>
+       <div class="sidebar-item" onclick="showPage('status-page')"><span class="sidebar-icon">🔄</span> <span>Track Status</span>
+       </div>
+       <div class="sidebar-item" onclick="showPage('profile-page')"><span class="sidebar-icon">👤</span> <span>Profile</span>
+       </div>
+      </nav>
+      <div class="sidebar-footer">
+       <div class="sidebar-item" onclick="logout()"><span class="sidebar-icon">🚪</span> <span>Logout</span>
+       </div>
+      </div>
+     </aside><!-- Main Content -->
+     <main class="dashboard-main">
+      <nav class="dashboard-navbar">
+       <div class="dashboard-navbar-left">
+        <h1 class="dashboard-title">Healthcare Facility Dashboard</h1>
+        <p class="dashboard-subtitle">City General Hospital</p>
+       </div>
+       <div class="dashboard-navbar-right"><button onclick="showNotification('warning', 'Urgent', '3 requests need attention')" class="icon-button"> 🔔 </button>
+        <div class="user-avatar facility-avatar">
+         CG
+        </div>
+       </div>
+      </nav>
+      <div class="dashboard-content"><!-- Overview Section -->
+       <div id="facility-overview" class="dashboard-section">
+        <div class="stats-grid">
+         <div class="stat-card animate-fade-in stagger-1">
+          <div class="stat-icon stat-icon-info">
+           📝
+          </div>
+          <div class="stat-details">
+           <div class="stat-value">
+            --
+           </div>
+           <div class="stat-label">
+            Total Requests
+           </div>
+          </div>
+         </div>
+         <div class="stat-card animate-fade-in stagger-2">
+          <div class="stat-icon stat-icon-success">
+           ✅
+          </div>
+          <div class="stat-details">
+           <div class="stat-value">
+            --
+           </div>
+           <div class="stat-label">
+            Fulfilled
+           </div>
+          </div>
+         </div>
+         <div class="stat-card animate-fade-in stagger-3">
+          <div class="stat-icon stat-icon-warning">
+           ⏳
+          </div>
+          <div class="stat-details">
+           <div class="stat-value">
+            --
+           </div>
+           <div class="stat-label">
+            Pending
+           </div>
+          </div>
+         </div>
+         <div class="stat-card animate-fade-in stagger-4">
+          <div class="stat-icon stat-icon-danger">
+           🚨
+          </div>
+          <div class="stat-details">
+           <div class="stat-value">
+            --
+           </div>
+           <div class="stat-label">
+            Urgent
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="card animate-fade-in stagger-3">
+         <div class="card-header">
+          <h2 class="card-title">Recent Requests</h2><button class="btn-secondary btn-sm" onclick="showDashboardSection('facility', 'myrequests')">View All</button>
+         </div>
+         <div class="table-container">
+          <table class="data-table">
+           <thead>
+            <tr>
+             <th>Supply Name</th>
+             <th>Quantity</th>
+             <th>Priority</th>
+             <th>Requested</th>
+             <th>Status</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr class="empty-state">
+             <td colspan="5">
+              <div class="empty-state-content">
+               <div class="empty-state-icon">
+                📝
+               </div>
+               <h3>No requests yet</h3>
+               <p>Create your first supply request</p><button class="btn-primary" onclick="showDashboardSection('facility', 'request')">Request Supplies</button>
+              </div></td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+       </div><!-- Request Supplies Section -->
+       <div id="facility-request" class="dashboard-section hidden">
+        <div class="card form-card animate-fade-in">
+         <h2 class="form-card-title">Request Medical Supplies</h2>
+         <p class="form-card-description">Provide detailed information about your supply requirements</p>
+         <form onsubmit="handleSupplyRequest(event)" class="donation-form">
+          <div class="form-row">
+           <div class="form-group"><label for="request-name" class="form-label"> <span>Supply Name</span> <span class="required">*</span> </label> <input type="text" id="request-name" class="form-input" placeholder="e.g., Oxygen Cylinders" required>
+           </div>
+           <div class="form-group"><label for="request-category" class="form-label"> <span>Category</span> <span class="required">*</span> </label> <select id="request-category" class="form-input" required> <option value="">Select category</option> <option value="medicine">Medicine &amp; Pharmaceuticals</option> <option value="equipment">Medical Equipment</option> <option value="ppe">PPE</option> <option value="consumables">Medical Consumables</option> <option value="diagnostic">Diagnostic Equipment</option> <option value="emergency">Emergency Supplies</option> </select>
+           </div>
+          </div>
+          <div class="form-row">
+           <div class="form-group"><label for="request-quantity" class="form-label"> <span>Quantity Needed</span> <span class="required">*</span> </label> <input type="number" id="request-quantity" class="form-input" placeholder="Enter quantity" min="1" required>
+           </div>
+           <div class="form-group"><label for="request-priority" class="form-label"> <span>Priority Level</span> <span class="required">*</span> </label> <select id="request-priority" class="form-input" required> <option value="">Select priority</option> <option value="low">Low - Within 2 weeks</option> <option value="medium">Medium - Within 1 week</option> <option value="high">High - Within 48 hours</option> <option value="critical">Critical - Urgent (24 hours)</option> </select>
+           </div>
+          </div>
+          <div class="form-group"><label for="request-department" class="form-label"> <span>Department / Unit</span> <span class="required">*</span> </label> <input type="text" id="request-department" class="form-input" placeholder="e.g., Emergency Department, ICU, Surgery" required>
+          </div>
+          <div class="form-group"><label for="request-reason" class="form-label"> <span>Reason / Justification</span> <span class="required">*</span> </label> <textarea id="request-reason" class="form-input form-textarea" rows="4" placeholder="Explain the need for these supplies, current situation, and impact on patient care..." required></textarea>
+           <p class="form-help-text">Please provide detailed justification to help prioritize your request</p>
+          </div>
+          <div class="form-group"><label for="request-contact" class="form-label"> <span>Contact Person</span> <span class="required">*</span> </label> <input type="text" id="request-contact" class="form-input" placeholder="Name and phone number for coordination" required>
+          </div>
+          <div class="form-actions"><button type="submit" class="btn-primary">Submit Request</button> <button type="button" class="btn-secondary" onclick="showDashboardSection('facility', 'overview')">Cancel</button>
+          </div>
+         </form>
+        </div>
+       </div><!-- My Requests Section -->
+       <div id="facility-myrequests" class="dashboard-section hidden">
+        <div class="card animate-fade-in">
+         <div class="card-header">
+          <div>
+           <h2 class="card-title">All Requests</h2>
+           <p class="card-subtitle">Monitor and track your supply requests</p>
+          </div><button class="btn-primary btn-sm" onclick="showDashboardSection('facility', 'request')">+ New Request</button>
+         </div>
+         <div class="table-container">
+          <table class="data-table">
+           <thead>
+            <tr>
+             <th>ID</th>
+             <th>Supply Name</th>
+             <th>Quantity</th>
+             <th>Priority</th>
+             <th>Department</th>
+             <th>Requested</th>
+             <th>Status</th>
+             <th>Actions</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr class="empty-state">
+             <td colspan="8">
+              <div class="empty-state-content">
+               <div class="empty-state-icon">
+                📋
+               </div>
+               <h3>No requests found</h3>
+               <p>Your request history will be displayed here</p><button class="btn-primary" onclick="showDashboardSection('facility', 'request')">Create First Request</button>
+              </div></td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main>
+    </div>
+   </div><!-- =====================================================
+             PAGE 6: NGO DASHBOARD
+        ===================================================== -->
+   <div id="ngo-dashboard" class="page h-full">
+    <div class="dashboard-layout"><!-- Sidebar -->
+     <aside class="sidebar">
+      <div class="sidebar-header">
+       <div class="nav-logo">
+        <svg width="36" height="36" viewbox="0 0 40 40" fill="none"><rect width="40" height="40" rx="12" fill="#2563EB" /> <path d="M20 10L30 15V25L20 30L10 25V15L20 10Z" stroke="white" stroke-width="2.5" fill="none" /> <path d="M14 20H26M20 14V26" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+        </svg><span>MedSync</span>
+       </div>
+      </div>
+      <nav class="sidebar-nav">
+       <div class="sidebar-item active" onclick="showDashboardSection('ngo', 'overview')"><span class="sidebar-icon">📊</span> <span>Dashboard</span>
+       </div>
+       <div class="sidebar-item" onclick="showDashboardSection('ngo', 'donations')"><span class="sidebar-icon">📦</span> <span>All Donations</span>
+       </div>
+       <div class="sidebar-item" onclick="showDashboardSection('ngo', 'requests')"><span class="sidebar-icon">📋</span> <span>All Requests</span>
+       </div>
+       <div class="sidebar-item" onclick="showDashboardSection('ngo', 'matching')"><span class="sidebar-icon">🔗</span> <span>Supply Matching</span>
+       </div>
+       <div class="sidebar-item" onclick="showPage('admin-page')"><span class="sidebar-icon">📈</span> <span>Analytics</span>
+       </div>
+       <div class="sidebar-item" onclick="showPage('profile-page')"><span class="sidebar-icon">👤</span> <span>Profile</span>
+       </div>
+      </nav>
+      <div class="sidebar-footer">
+       <div class="sidebar-item" onclick="logout()"><span class="sidebar-icon">🚪</span> <span>Logout</span>
+       </div>
+      </div>
+     </aside><!-- Main Content -->
+     <main class="dashboard-main">
+      <nav class="dashboard-navbar">
+       <div class="dashboard-navbar-left">
+        <h1 class="dashboard-title">NGO Coordinator Dashboard</h1>
+        <p class="dashboard-subtitle">HealthAid Foundation</p>
+       </div>
+       <div class="dashboard-navbar-right"><button onclick="showNotification('success', 'Match Found!', '5 supplies matched with requests')" class="icon-button"> 🔔 </button>
+        <div class="user-avatar ngo-avatar">
+         HA
+        </div>
+       </div>
+      </nav>
+      <div class="dashboard-content"><!-- Overview Section -->
+       <div id="ngo-overview" class="dashboard-section">
+        <div class="stats-grid">
+         <div class="stat-card animate-fade-in stagger-1">
+          <div class="stat-icon stat-icon-success">
+           📦
+          </div>
+          <div class="stat-details">
+           <div class="stat-value">
+            --
+           </div>
+           <div class="stat-label">
+            Total Donations
+           </div>
+          </div>
+         </div>
+         <div class="stat-card animate-fade-in stagger-2">
+          <div class="stat-icon stat-icon-info">
+           📝
+          </div>
+          <div class="stat-details">
+           <div class="stat-value">
+            --
+           </div>
+           <div class="stat-label">
+            Active Requests
+           </div>
+          </div>
+         </div>
+         <div class="stat-card animate-fade-in stagger-3">
+          <div class="stat-icon stat-icon-primary">
+           🔗
+          </div>
+          <div class="stat-details">
+           <div class="stat-value">
+            --
+           </div>
+           <div class="stat-label">
+            Matches Made
+           </div>
+          </div>
+         </div>
+         <div class="stat-card animate-fade-in stagger-4">
+          <div class="stat-icon stat-icon-warning">
+           🏥
+          </div>
+          <div class="stat-details">
+           <div class="stat-value">
+            --
+           </div>
+           <div class="stat-label">
+            Facilities Served
+           </div>
+          </div>
+         </div>
+        </div><!-- Pending Actions Grid -->
+        <div class="info-grid">
+         <div class="card animate-fade-in stagger-2">
+          <div class="card-header">
+           <h3 class="card-title">⚡ Urgent Requests</h3>
+          </div>
+          <div class="info-list">
+           <div class="info-item">
+            <div class="info-item-icon urgent-icon">
+             🚨
+            </div>
+            <div class="info-item-content">
+             <div class="info-item-title">
+              No urgent requests
+             </div>
+             <div class="info-item-subtitle">
+              System will show high-priority needs here
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="card animate-fade-in stagger-3">
+          <div class="card-header">
+           <h3 class="card-title">📦 Available Donations</h3>
+          </div>
+          <div class="info-list">
+           <div class="info-item">
+            <div class="info-item-icon available-icon">
+             📦
+            </div>
+            <div class="info-item-content">
+             <div class="info-item-title">
+              No available donations
+             </div>
+             <div class="info-item-subtitle">
+              Waiting for new donations to arrive
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- All Donations Section -->
+       <div id="ngo-donations" class="dashboard-section hidden">
+        <div class="card animate-fade-in">
+         <div class="card-header">
+          <div>
+           <h2 class="card-title">All Donations</h2>
+           <p class="card-subtitle">View and manage incoming donations</p>
+          </div>
+         </div>
+         <div class="table-container">
+          <table class="data-table">
+           <thead>
+            <tr>
+             <th>Donor</th>
+             <th>Supply</th>
+             <th>Category</th>
+             <th>Quantity</th>
+             <th>Location</th>
+             <th>Date</th>
+             <th>Status</th>
+             <th>Action</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr class="empty-state">
+             <td colspan="8">
+              <div class="empty-state-content">
+               <div class="empty-state-icon">
+                📦
+               </div>
+               <h3>No donations to manage</h3>
+               <p>Donations from donors will appear here for allocation</p>
+              </div></td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+       </div><!-- All Requests Section -->
+       <div id="ngo-requests" class="dashboard-section hidden">
+        <div class="card animate-fade-in">
+         <div class="card-header">
+          <div>
+           <h2 class="card-title">All Requests</h2>
+           <p class="card-subtitle">Review and process facility requests</p>
+          </div>
+         </div>
+         <div class="table-container">
+          <table class="data-table">
+           <thead>
+            <tr>
+             <th>Facility</th>
+             <th>Supply</th>
+             <th>Category</th>
+             <th>Quantity</th>
+             <th>Priority</th>
+             <th>Requested</th>
+             <th>Status</th>
+             <th>Action</th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr class="empty-state">
+             <td colspan="8">
+              <div class="empty-state-content">
+               <div class="empty-state-icon">
+                📋
+               </div>
+               <h3>No requests to process</h3>
+               <p>Facility requests will be shown here for matching and allocation</p>
+              </div></td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+       </div><!-- Supply Matching Section -->
+       <div id="ngo-matching" class="dashboard-section hidden">
+        <div class="section-header">
+         <div>
+          <h2 class="section-title">Supply Matching</h2>
+          <p class="section-subtitle">Match available donations with facility requests</p>
+         </div>
+        </div>
+        <div class="empty-state-large">
+         <div class="empty-state-icon-large">
+          🔗
+         </div>
+         <h3>No matches available</h3>
+         <p>Matching opportunities will appear here when donations and requests align</p>
+         <div class="empty-state-features">
+          <div class="empty-state-feature"><span>✓</span> Automatic supply matching
+          </div>
+          <div class="empty-state-feature"><span>✓</span> Priority-based allocation
+          </div>
+          <div class="empty-state-feature"><span>✓</span> Location optimization
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main>
+    </div>
+   </div><!-- =====================================================
+             PAGE 7: STATUS TRACKING PAGE
+        ===================================================== -->
+   <div id="status-page" class="page h-full">
+    <div class="h-full flex flex-col">
+     <nav class="navbar">
+      <div class="flex items-center gap-4"><button onclick="goBack()" class="back-button-simple">←</button>
+       <div>
+        <h1 class="nav-title">Track Supply Status</h1>
+        <p class="nav-subtitle">Monitor your supply journey in real-time</p>
+       </div>
+      </div>
+     </nav>
+     <div class="flex-1 p-6 overflow-y-auto" style="background: var(--primary-bg);">
+      <div class="content-container"><!-- Search Card -->
+       <div class="card animate-fade-in">
+        <h2 class="card-title">Track Your Order</h2>
+        <p class="card-subtitle">Enter your tracking ID to see the current status</p>
+        <div class="search-container"><input type="text" class="form-input" placeholder="Enter tracking ID (e.g., #D001, #R001)" id="tracking-search"> <button class="btn-primary">Track Order</button>
+        </div>
+       </div><!-- Status Display - Initially Hidden -->
+       <div class="card animate-fade-in stagger-2" id="status-display" style="display: none;">
+        <div class="status-header">
+         <div>
+          <h2 class="status-title">Supply Tracking</h2>
+          <p class="status-id">Tracking ID: #SAMPLE</p>
+         </div><span class="badge badge-dispatched">In Transit</span>
+        </div><!-- Progress Tracker -->
+        <div class="progress-tracker">
+         <div class="progress-line">
+          <div class="progress-line-fill" style="width: 50%;"></div>
+         </div>
+         <div class="progress-step">
+          <div class="progress-circle completed">
+           ✓
+          </div>
+          <div class="progress-label">
+           Submitted
+          </div>
+          <div class="progress-date">
+           ---
+          </div>
+         </div>
+         <div class="progress-step">
+          <div class="progress-circle completed">
+           ✓
+          </div>
+          <div class="progress-label">
+           Verified
+          </div>
+          <div class="progress-date">
+           ---
+          </div>
+         </div>
+         <div class="progress-step">
+          <div class="progress-circle active">
+           3
+          </div>
+          <div class="progress-label">
+           In Transit
+          </div>
+          <div class="progress-date">
+           ---
+          </div>
+         </div>
+         <div class="progress-step">
+          <div class="progress-circle pending">
+           4
+          </div>
+          <div class="progress-label">
+           Delivered
+          </div>
+          <div class="progress-date">
+           Pending
+          </div>
+         </div>
+        </div><!-- Timeline -->
+        <div class="timeline-section">
+         <h3 class="timeline-title">Activity Timeline</h3>
+         <div class="timeline">
+          <div class="timeline-item">
+           <div class="timeline-dot active"></div>
+           <div class="timeline-content">
+            <div class="timeline-event">
+             Tracking information available
+            </div>
+            <div class="timeline-time">
+             Enter a valid tracking ID to see details
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Info Card -->
+       <div class="info-card animate-fade-in stagger-3">
+        <div class="info-card-icon">
+         ℹ️
+        </div>
+        <div class="info-card-content">
+         <h3 class="info-card-title">How to Track</h3>
+         <p class="info-card-text">You can find your tracking ID in your dashboard under donations or requests. The ID starts with #D for donations and #R for requests.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- =====================================================
+             PAGE 8: PROFILE PAGE
+        ===================================================== -->
+   <div id="profile-page" class="page h-full">
+    <div class="h-full flex flex-col">
+     <nav class="navbar">
+      <div class="flex items-center gap-4"><button onclick="goBack()" class="back-button-simple">←</button>
+       <h1 class="nav-title">My Profile</h1>
+      </div>
+     </nav>
+     <div class="flex-1 p-6 overflow-y-auto" style="background: var(--primary-bg);">
+      <div class="content-container">
+       <div class="card profile-card animate-fade-in"><!-- Profile Header -->
+        <div class="profile-header">
+         <div class="profile-avatar-large donor-avatar">
+          JD
+         </div>
+         <div class="profile-info">
+          <h2 class="profile-name">John Doe</h2>
+          <p class="profile-email">john.doe@email.com</p><span class="badge badge-role">Donor</span>
+         </div>
+        </div><!-- Account Information -->
+        <div class="profile-section">
+         <h3 class="profile-section-title">Account Information</h3>
+         <div class="form-row">
+          <div class="form-group"><label for="profile-name" class="form-label">Full Name</label> <input type="text" id="profile-name" class="form-input" value="John Doe">
+          </div>
+          <div class="form-group"><label for="profile-email" class="form-label">Email</label> <input type="email" id="profile-email" class="form-input" value="john.doe@email.com">
+          </div>
+         </div>
+         <div class="form-row">
+          <div class="form-group"><label for="profile-phone" class="form-label">Phone</label> <input type="tel" id="profile-phone" class="form-input" value="+1 (555) 123-4567">
+          </div>
+          <div class="form-group"><label for="profile-location" class="form-label">Location</label> <input type="text" id="profile-location" class="form-input" value="New York, NY">
+          </div>
+         </div>
+        </div><!-- Impact Stats -->
+        <div class="profile-section">
+         <h3 class="profile-section-title">Your Impact</h3>
+         <div class="impact-stats">
+          <div class="impact-stat">
+           <div class="impact-value">
+            --
+           </div>
+           <div class="impact-label">
+            Contributions
+           </div>
+          </div>
+          <div class="impact-stat">
+           <div class="impact-value">
+            --
+           </div>
+           <div class="impact-label">
+            Completed
+           </div>
+          </div>
+          <div class="impact-stat">
+           <div class="impact-value">
+            --
+           </div>
+           <div class="impact-label">
+            Lives Impacted
+           </div>
+          </div>
+         </div>
+        </div><!-- Actions -->
+        <div class="profile-actions"><button class="btn-primary">Save Changes</button> <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- =====================================================
+             PAGE 9: ADMIN / ANALYTICS PAGE
+        ===================================================== -->
+   <div id="admin-page" class="page h-full">
+    <div class="h-full flex flex-col">
+     <nav class="navbar">
+      <div class="flex items-center gap-4"><button onclick="goBack()" class="back-button-simple">←</button>
+       <div>
+        <h1 class="nav-title">Analytics &amp; Insights</h1>
+        <p class="nav-subtitle">Platform-wide statistics and performance</p>
+       </div>
+      </div>
+     </nav>
+     <div class="flex-1 p-6 overflow-y-auto" style="background: var(--primary-bg);"><!-- Stats Overview -->
+      <div class="stats-grid">
+       <div class="stat-card animate-fade-in stagger-1">
+        <div class="stat-icon stat-icon-success">
+         📦
+        </div>
+        <div class="stat-details">
+         <div class="stat-value">
+          --
+         </div>
+         <div class="stat-label">
+          Total Donations
+         </div>
+        </div>
+       </div>
+       <div class="stat-card animate-fade-in stagger-2">
+        <div class="stat-icon stat-icon-info">
+         📝
+        </div>
+        <div class="stat-details">
+         <div class="stat-value">
+          --
+         </div>
+         <div class="stat-label">
+          Total Requests
+         </div>
+        </div>
+       </div>
+       <div class="stat-card animate-fade-in stagger-3">
+        <div class="stat-icon stat-icon-primary">
+         ✅
+        </div>
+        <div class="stat-details">
+         <div class="stat-value">
+          --
+         </div>
+         <div class="stat-label">
+          Fulfilled
+         </div>
+        </div>
+       </div>
+       <div class="stat-card animate-fade-in stagger-4">
+        <div class="stat-icon stat-icon-warning">
+         ⏳
+        </div>
+        <div class="stat-details">
+         <div class="stat-value">
+          --
+         </div>
+         <div class="stat-label">
+          Pending
+         </div>
+        </div>
+       </div>
+      </div><!-- Charts Section -->
+      <div class="charts-grid">
+       <div class="card animate-fade-in stagger-2">
+        <h3 class="card-title">Platform Activity</h3>
+        <div class="chart-placeholder">
+         <div class="chart-placeholder-icon">
+          📊
+         </div>
+         <p class="chart-placeholder-text">Analytics charts will be displayed here once data is available</p>
+        </div>
+       </div>
+       <div class="card animate-fade-in stagger-3">
+        <h3 class="card-title">Distribution by Category</h3>
+        <div class="chart-placeholder">
+         <div class="chart-placeholder-icon">
+          📈
+         </div>
+         <p class="chart-placeholder-text">Category breakdown visualization coming soon</p>
+        </div>
+       </div>
+      </div><!-- Performance Metrics -->
+      <div class="card animate-fade-in stagger-4">
+       <h3 class="card-title">System Performance</h3>
+       <div class="metrics-grid">
+        <div class="metric-item">
+         <div class="metric-label">
+          Response Time
+         </div>
+         <div class="metric-value">
+          Excellent
+         </div>
+         <div class="metric-bar">
+          <div class="metric-bar-fill" style="width: 95%; background: var(--primary-action);"></div>
+         </div>
+        </div>
+        <div class="metric-item">
+         <div class="metric-label">
+          Success Rate
+         </div>
+         <div class="metric-value">
+          Optimal
+         </div>
+         <div class="metric-bar">
+          <div class="metric-bar-fill" style="width: 100%; background: #22C55E;"></div>
+         </div>
+        </div>
+        <div class="metric-item">
+         <div class="metric-label">
+          User Satisfaction
+         </div>
+         <div class="metric-value">
+          High
+         </div>
+         <div class="metric-bar">
+          <div class="metric-bar-fill" style="width: 92%; background: var(--primary-action);"></div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- =====================================================
+             MODAL: ALLOCATE SUPPLY
+        ===================================================== -->
+   <div id="allocate-modal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
+    <div class="modal-content">
+     <div class="modal-header">
+      <h2 class="modal-title">Allocate Supply</h2><button onclick="closeModal('allocate-modal')" class="modal-close">×</button>
+     </div>
+     <form onsubmit="handleAllocate(event)" class="modal-form">
+      <div class="form-group"><label for="allocate-facility" class="form-label"> <span>Select Facility</span> <span class="required">*</span> </label> <select id="allocate-facility" class="form-input" required> <option value="">Choose a facility</option> <option value="1">City General Hospital</option> <option value="2">Regional Medical Center</option> <option value="3">Community Health Clinic</option> </select>
+      </div>
+      <div class="form-group"><label for="allocate-quantity" class="form-label"> <span>Quantity to Allocate</span> <span class="required">*</span> </label> <input type="number" id="allocate-quantity" class="form-input" placeholder="Enter quantity" min="1" required>
+      </div>
+      <div class="form-group"><label for="allocate-notes" class="form-label">Notes</label> <textarea id="allocate-notes" class="form-input form-textarea" rows="3" placeholder="Add any coordination notes..."></textarea>
+      </div>
+      <div class="modal-actions"><button type="submit" class="btn-primary">Confirm Allocation</button> <button type="button" class="btn-secondary" onclick="closeModal('allocate-modal')">Cancel</button>
+      </div>
+     </form>
+    </div>
+   </div>
+  </div><!-- Link to JavaScript -->
+  <script src="js/script.js"></script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bb2aac4255af2d6',t:'MTc2Nzk0ODQxNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
