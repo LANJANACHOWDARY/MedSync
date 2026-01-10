@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head><link rel="stylesheet" href="style.css"></head>
+<body>
+    <div class="sidebar">
+        <div class="logo">🛡️ MedSync</div>
+        <div class="nav-menu">
+            <a href="ngo-dashboard.html" class="active">🤝 Allocations</a>
+        </div>
+        <a href="index.html" style="margin-top:auto; color:red; text-decoration:none;">Logout</a>
+    </div>
+    <div class="main">
+        <div class="header"><h2>NGO Allocation Center</h2></div>
+        
+        <div style="display: flex; gap: 20px; margin-bottom: 30px;">
+            <div style="flex: 1; background: white; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                <h3>1. Select a Request</h3>
+                <table id="ngoRequestTable">
+                    <thead><tr><th>ID</th><th>Item</th><th>Qty</th><th>Action</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div style="flex: 1; background: white; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                <h3>2. Select a Donation</h3>
+                <table id="ngoDonationTable">
+                    <thead><tr><th>ID</th><th>Medicine</th><th>Qty</th><th>Action</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="matchInfo" style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: none;">
+            <p>Matching Request <strong id="selReq">None</strong> with Donation <strong id="selDon">None</strong></p>
+            <button onclick="confirmMatch()" class="btn" style="background: #16a34a; width: 200px; margin-top:10px;">Confirm Allocation</button>
+        </div>
+
+        <h3>Allocation History</h3>
+        <table id="historyTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NGO</th>
+                    <th>Request ID</th>
+                    <th>Donation ID</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
+
