@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head><link rel="stylesheet" href="style.css"></head>
+<body>
+    <div class="sidebar">
+        <div class="logo">🛡️ MedSync</div>
+        <div class="nav-menu">
+            <a href="hospital-dashboard.html" class="active">🏥 Supply Requests</a>
+        </div>
+        <a href="index.html" style="margin-top:auto; color:red; text-decoration:none;">Logout</a>
+    </div>
+    <div class="main">
+        <div class="header"><h2>Hospital Dashboard</h2></div>
+
+        <div style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 30px; max-width: 600px;">
+            <h3 style="margin-bottom: 20px;">Create New Supply Request</h3>
+            <form onsubmit="handleRequest(event)">
+                <div class="field">
+                    <label>Item Name</label>
+                    <input type="text" name="item_name" placeholder="e.g., Paracetamol" required>
+                </div>
+                <div style="display: flex; gap: 15px;">
+                    <div class="field" style="flex: 1;">
+                        <label>Quantity Needed</label>
+                        <input type="number" name="quantity_needed" required>
+                    </div>
+                    <div class="field" style="flex: 1;">
+                        <label>Unit</label>
+                        <input type="text" name="unit" placeholder="bottles, tablets, etc." required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Priority</label>
+                    <select name="priority" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #e2e8f0; background: #f8fafc;">
+                        <option value="Low">Low</option>
+                        <option value="Medium" selected>Medium</option>
+                        <option value="High">High</option>
+                        <option value="Critical">Critical</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Location</label>
+                    <input type="text" name="location" placeholder="Hospital Ward/City" required>
+                </div>
+                <button type="submit" class="btn" style="width: auto; padding: 10px 30px;">Submit Request</button>
+            </form>
+        </div>
+
+        <h3>Recent Requests</h3>
+        <table style="margin-top: 15px;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Unit</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

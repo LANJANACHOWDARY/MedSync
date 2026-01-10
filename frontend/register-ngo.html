@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><link rel="stylesheet" href="style.css"></head>
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-left">
+            <div><h1 class="reveal shadow-heading">Partner With Us</h1></div>
+        </div>
+        <div class="auth-right">
+            <h2 class="reveal">NGO Registration</h2>
+            <form id="regForm" action="ngo-dashboard.html" method="POST" class="reveal">
+                <div class="field"><label>NGO Name</label><input type="text" name="ngo_name" required></div>
+                <div class="field"><label>Email ID</label><input type="email" name="email" required></div>
+                <div class="field"><label>Password</label><input type="password" name="password" required></div>
+                <div class="field"><label>Registration ID</label><input type="text" name="reg_id" required></div>
+                <button type="submit" class="btn">Register NGO</button>
+            </form>
+        </div>
+    </div>
+    <script src="index.js"></script>
+    <script>
+        document.getElementById('regForm').onsubmit = function(e) {
+            e.preventDefault();
+            window.location.href = 'ngo-dashboard.html';
+        };
+    </script>
+</body>
+</html>

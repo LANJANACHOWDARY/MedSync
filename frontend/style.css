@@ -1,0 +1,167 @@
+:root {
+    --primary: #2563eb;
+    --dark: #1e3a8a;
+    --grad: linear-gradient(135deg, #f472b6 0%, #6366f1 100%);
+    --bg: #f8fafc;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+body { background: var(--bg); color: #1e293b; }
+
+/* --- NAVIGATION & BRANDING --- */
+.top-nav {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 100;
+}
+.logo-icon { font-size: 30px; }
+.brand-name { 
+    font-size: 26px; 
+    font-weight: 800; 
+    background: var(--grad); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px; 
+}
+
+/* --- DASHBOARD LAYOUT --- */
+.sidebar { 
+    width: 260px; 
+    background: white; 
+    border-right: 1px solid #e2e8f0; 
+    height: 100vh; 
+    position: fixed; 
+    padding: 25px; 
+    display: flex; 
+    flex-direction: column; 
+    z-index: 1000;
+}
+.nav-menu a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; text-decoration: none; color: #64748b; border-radius: 8px; margin-bottom: 5px; transition: 0.3s; }
+.nav-menu a.active { background: #eff6ff; color: var(--primary); font-weight: 600; }
+
+.main {
+    margin-left: 260px;
+    padding: 40px;
+    min-height: 100vh;
+    width: calc(100% - 260px);
+}
+
+/* --- TABLE STYLES (Fixed Column Visibility) --- */
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    background: white; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    margin-top: 20px;
+    display: table !important; /* Ensures it behaves as a table */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+thead { display: table-header-group; }
+tr { display: table-row; }
+
+th, td { 
+    text-align: left; 
+    padding: 18px 20px; 
+    border-bottom: 1px solid #f1f5f9;
+    display: table-cell !important; /* Fixes the bunched text issue */
+    min-width: 130px; /* Ensures columns have enough width */
+}
+
+th { 
+    background: #f8fafc; 
+    color: #64748b; 
+    font-size: 13px; 
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* --- STATUS COLORS --- */
+.status-critical { color: #dc2626; font-weight: bold; }
+.status-high { color: #ea580c; font-weight: 600; }
+.status-completed { color: #16a34a; font-weight: 600; }
+
+/* --- HOME & HERO --- */
+.hero-section {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 100vh; text-align: center; padding: 20px;
+}
+.card-container { display: flex; gap: 25px; max-width: 1100px; margin-top: 40px; }
+
+/* --- ENTRANCE REVEAL --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+    transition: all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1);
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* --- PREMIUM HOVER (Spring Effect) --- */
+.card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 24px;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    flex: 1;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
+}
+.card:hover {
+    transform: translateY(-20px) scale(1.06) !important;
+    box-shadow: 0 30px 60px -15px rgba(99, 102, 241, 0.4); 
+    border-color: #f472b6;
+}
+.card:active { transform: translateY(-10px) scale(0.98) !important; }
+.card-icon { font-size: 45px; margin-bottom: 20px; transition: transform 0.4s ease; }
+.card:hover .card-icon { transform: scale(1.2) rotate(5deg); }
+
+/* --- FORMS & AUTH --- */
+.auth-wrapper { display: flex; width: 100%; height: 100vh; position: fixed; top:0; left:0; z-index: 1100;}
+.auth-left { flex: 1; background: var(--grad); color: white; display: flex; align-items: center; justify-content: center; padding: 40px; }
+.auth-right { flex: 1; background: white; padding: 60px; overflow-y: auto; }
+
+.field { margin-bottom: 20px; }
+.field label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; }
+.field input, .field select { 
+    width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; 
+    background: #f8fafc; transition: 0.3s;
+}
+.field input[type="date"] { cursor: pointer; }
+.btn { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; }
+h2.reveal {
+    /* Using a soft purple glow to match your --grad variable */
+    text-shadow: 0px 4px 10px rgba(99, 102, 241, 0.3);
+    color: var(--dark);
+}
+.hero-section h1 {
+    font-size: 50px;
+    font-weight: 800;
+    color: #1e3a8a; /* Dark blue from your palette */
+    margin-bottom: 10px;
+    
+    /* THE SHADOW CODE */
+    text-shadow: 
+        0px 4px 4px rgba(0, 0, 0, 0.25), 
+        0px 2px 2px rgba(0, 0, 0, 0.1);
+    
+    letter-spacing: -1px;
+}/* Deep shadow for the white headings on the colored left side */
+.shadow-heading {
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    font-size: 55px; /* Larger for the auth side */
+    font-weight: 800;
+}
+
+/* Ensure the auth-left text is centered */
+.auth-left h1 {
+    line-height: 1.2;
+}
