@@ -10,7 +10,7 @@ app.use(cors());
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'anjana', // Your password from the screenshot
+    password: 'root', 
     database: 'medsync'
 });
 
